@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NavigationInMVVM</string>
+    <string name="hello_boy">Hello boy !</string>
+    <string name="edit">edit</string>
 </resources>
