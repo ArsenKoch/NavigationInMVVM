@@ -1,10 +1,11 @@
 package com.example.navigationinmvvm.navigator
 
 import androidx.annotation.StringRes
+import com.example.navigationinmvvm.screens.base.BaseScreen
 
 interface Navigator {
 
-    fun launch()
+    fun launch(screen: BaseScreen)
 
     fun goBack(result: Any? = null)
 
