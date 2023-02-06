@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.navigationinmvvm.screens.base
 
 import androidx.fragment.app.viewModels
