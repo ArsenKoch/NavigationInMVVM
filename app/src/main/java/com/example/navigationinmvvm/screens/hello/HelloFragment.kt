@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.example.navigationinmvvm.databinding.FragmentHelloBinding
 import com.example.navigationinmvvm.screens.base.BaseFragment
 import com.example.navigationinmvvm.screens.base.BaseScreen
-import com.example.navigationinmvvm.screens.base.BaseViewModel
 import com.example.navigationinmvvm.screens.base.screenViewModel
 
 class HelloFragment : BaseFragment() {
