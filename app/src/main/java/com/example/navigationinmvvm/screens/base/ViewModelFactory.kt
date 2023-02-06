@@ -3,14 +3,28 @@ package com.example.navigationinmvvm.screens.base
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.navigationinmvvm.navigator.ARG_SCREEN
+import com.example.navigationinmvvm.navigator.MainNavigator
+import com.example.navigationinmvvm.navigator.Navigator
 
-class ViewModelFactory : ViewModelProvider.Factory {
+class ViewModelFactory(
+    private val screen: BaseScreen,
+    private val fragment: BaseFragment
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return super.create(modelClass)
+        val hostActivity = fragment.requireActivity()
+        val application = hostActivity.application
+        val navigatorProvider =
+            ViewModelProvider(hostActivity, ViewModelProvider.AndroidViewModelFactory(application))
+        val navigator = navigatorProvider[MainNavigator::class.java]
+
+        val constructor = modelClass.getConstructor(Navigator::class.java, screen::class.java)
+        return constructor.newInstance(navigator, screen)
     }
 }
 
 inline fun <reified VM : ViewModel> BaseFragment.screenViewModel() = viewModels<VM> {
-    ViewModelFactory()
+    val screen = requireArguments().getSerializable(ARG_SCREEN) as BaseScreen
+    ViewModelFactory(screen, this)
 }
